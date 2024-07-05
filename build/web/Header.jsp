@@ -29,7 +29,7 @@
             if (session != null && session.getAttribute("user") != null) {
                 String username = (String) session.getAttribute("user");
         %>
-            <a href="Profile.html" class="user"><i class="ri-user-fill"></i></a>
+        <a href="Profile.jsp" class="user"><i class="ri-user-fill"></i><%= username %></a>
             <button id="logout-button" onclick="location.href='LogoutServlet'" class="log-out">Logout</button>
         <%
             } else {

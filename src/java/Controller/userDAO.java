@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Database.DbConnection;
+import Model.User;
 
 /**
  *
@@ -35,4 +36,42 @@ public class userDAO {
             return false;
         }
     }
+    
+     public User getUserByUsername(String username) {
+        String sql = "SELECT * FROM user_tbl WHERE Username = ?";
+        try (Connection conn = new DbConnection().setConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getString("Username"), rs.getString("Email"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("SQL State: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("Message: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean updateUserEmail(String username, String email) {
+        String sql = "UPDATE user_tbl SET Email = ? WHERE Username = ?";
+        try (Connection conn = new DbConnection().setConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, username);
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("SQL State: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("Message: " + e.getMessage());
+            return false;
+        }
+    }
+
+
 }
+
