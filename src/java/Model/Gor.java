@@ -1,19 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
+import java.sql.Blob;
+
 /**
- *
- * @author VENU WICAKSONO
+ * Model class representing a GOR.
+ * 
+ * Author: VENU WICAKSONO
  */
 public class Gor {
     private String Nama_Gor;
     private String Kota;
     private double Rating;
     private double Harga;
-    private String image;
+    private Blob imageBlob;
 
     public String getNama_Gor() {
         return Nama_Gor;
@@ -47,13 +46,24 @@ public class Gor {
         this.Harga = Harga;
     }
 
-    public String getImage() {
-        return image;
+    public Blob getImageBlob() {
+        return imageBlob;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageBlob(Blob imageBlob) {
+        this.imageBlob = imageBlob;
     }
 
-   
+    public String getImageBase64() {
+        if (this.imageBlob != null) {
+            try {
+                int blobLength = (int) imageBlob.length();
+                byte[] blobAsBytes = imageBlob.getBytes(1, blobLength);
+                return java.util.Base64.getEncoder().encodeToString(blobAsBytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }

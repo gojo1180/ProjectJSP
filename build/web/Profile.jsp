@@ -25,12 +25,13 @@
                     </ul>
                 </div>
                 <div class="main-content">
-                    <form id="profile-form" method="post" action="UpdateServlet">
+                    <form id="profile-form" method="post" action="UpdateProfileServlet">
                         <%
+                     
                             if (session != null && session.getAttribute("user") != null) {
                                 String username = (String) session.getAttribute("user");
-                                userDAO userDAO = new userDAO();
-                                User user = userDAO.getUserByUsername(username);
+                                userDAO UserDAO = new userDAO();
+                                User user = UserDAO.getUserByUsername(username);
                                 String email = (user != null) ? user.getEmail() : "";
                         %>
                         <div class="form-group">
@@ -47,6 +48,9 @@
                                 response.sendRedirect("login.jsp");
                             }
                         %>
+                    </form>
+                    <form id="delete-account-form" method="post" action="DeleteAccountServlet">
+                        <button type="submit" class="btn-delete">Hapus Akun</button>
                     </form>
                 </div>
             </div>

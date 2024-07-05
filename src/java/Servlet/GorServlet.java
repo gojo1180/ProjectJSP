@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Servlet;
 
 import Database.DbConnection;
@@ -14,13 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 @WebServlet("/GorServlet")
 public class GorServlet extends HttpServlet {
@@ -32,10 +25,32 @@ public class GorServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        String city = request.getParameter("city");
+        String search = request.getParameter("search");
+
         List<Gor> gorList = new ArrayList<>();
         try (Connection connection = new DbConnection().setConnection()) {
-            String sql = "SELECT * FROM Gor";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            StringBuilder sql = new StringBuilder("SELECT * FROM Gor WHERE 1=1");
+
+            if (city != null && !city.isEmpty()) {
+                sql.append(" AND Kota = ?");
+            }
+
+            if (search != null && !search.isEmpty()) {
+                sql.append(" AND Nama_Gor LIKE ?");
+            }
+
+            PreparedStatement statement = connection.prepareStatement(sql.toString());
+
+            int paramIndex = 1;
+            if (city != null && !city.isEmpty()) {
+                statement.setString(paramIndex++, city);
+            }
+
+            if (search != null && !search.isEmpty()) {
+                statement.setString(paramIndex++, "%" + search + "%");
+            }
+
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Gor gor = new Gor();
@@ -43,7 +58,7 @@ public class GorServlet extends HttpServlet {
                 gor.setKota(resultSet.getString("Kota"));
                 gor.setRating(resultSet.getDouble("Rating"));
                 gor.setHarga(resultSet.getDouble("Harga_Gor"));
-                gor.setImage(resultSet.getString("GamBar"));
+                gor.setImageBlob(resultSet.getBlob("GamBar"));
                 gorList.add(gor);
             }
         } catch (SQLException e) {
@@ -54,6 +69,3 @@ public class GorServlet extends HttpServlet {
         request.getRequestDispatcher("SewaLapangan.jsp").forward(request, response);
     }
 }
-
-
-

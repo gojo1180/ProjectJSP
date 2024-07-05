@@ -72,6 +72,21 @@ public class userDAO {
         }
     }
 
+    public boolean deleteUserByUsername(String username) {
+    String sql = "DELETE FROM user_tbl WHERE Username = ?";
+    try (Connection conn = new DbConnection().setConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, username);
+        int result = ps.executeUpdate();
+        return result > 0;
+    } catch (SQLException e) {
+       e.printStackTrace();
+            System.err.println("SQL State: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("Message: " + e.getMessage());
+        return false;
+    }
+    }
 
 }
 

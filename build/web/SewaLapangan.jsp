@@ -8,8 +8,19 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>JSP Page</title>
   <link rel="stylesheet" type="text/css" href="CSS/SewaLapangan.css">
+  <script>
+    function searchGor() {
+      const searchInput = document.getElementById("gor-search").value;
+      const citySelect = document.getElementById("city-dropdown").value;
+      const url = new URL(window.location.href);
+      url.searchParams.set("search", searchInput);
+      url.searchParams.set("city", citySelect);
+      window.location.href = url.toString();
+    }
+  </script>
 </head>
 <body>
+   
    <section class="booking">
         <h2>BOOKING LAPANGAN TERBAIK</h2>
         <div class="search-container">
@@ -20,7 +31,7 @@
                 <option value="Depok">Depok</option>
                 <option value="Bekasi">Bekasi</option>
             </select>
-            <button id="search-btn">Cari Venue</button>
+            <button id="search-btn" onclick="searchGor()">Cari Venue</button>
         </div>
         <div class="gor-container">
             <%
@@ -28,7 +39,18 @@
                 for (Gor gor : gorList) {
             %>
             <div class="gor-item" data-gor="<%= gor.getNama_Gor() %>" data-city="<%= gor.getKota() %>" onclick="navigateTo<%= gor.getNama_Gor().replaceAll(" ", "") %>()">
-                <img src="<%= gor.getImage() %>" alt="<%= gor.getNama_Gor() %>">
+                <%
+                    String base64Image = gor.getImageBase64();
+                    if (base64Image != null) {
+                %>
+                <img src="data:image/jpeg;base64,<%= base64Image %>" alt="<%= gor.getNama_Gor() %>">
+                <%
+                    } else {
+                %>
+                <img src="default-image.jpg" alt="<%= gor.getNama_Gor() %>">
+                <%
+                    }
+                %>
                 <div class="gor-info">
                     <h3><%= gor.getNama_Gor() %></h3>
                     <p>Rating: ⭐ <%= gor.getRating() %></p>
