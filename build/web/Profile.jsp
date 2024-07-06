@@ -25,7 +25,7 @@
                     </ul>
                 </div>
                 <div class="main-content">
-                    <form id="profile-form" method="post" action="UpdateProfileServlet">
+                    <form id="profile-form" method="post" action="UpdateServlet">
                         <%
                      
                             if (session != null && session.getAttribute("user") != null) {

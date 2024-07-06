@@ -8,11 +8,20 @@ import java.sql.Blob;
  * Author: VENU WICAKSONO
  */
 public class Gor {
+    private int Id_Gor;
     private String Nama_Gor;
     private String Kota;
     private double Rating;
     private double Harga;
     private Blob imageBlob;
+
+    public int getId_Gor() {
+        return Id_Gor;
+    }
+
+    public void setId_Gor(int Id_Gor) {
+        this.Id_Gor = Id_Gor;
+    }
 
     public String getNama_Gor() {
         return Nama_Gor;
@@ -53,6 +62,8 @@ public class Gor {
     public void setImageBlob(Blob imageBlob) {
         this.imageBlob = imageBlob;
     }
+
+    
 
     public String getImageBase64() {
         if (this.imageBlob != null) {

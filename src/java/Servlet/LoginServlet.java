@@ -24,26 +24,42 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
         String uName = request.getParameter("uName");
         String pWord = request.getParameter("pWord");
 
         try {
             conn = new DbConnection().setConnection();
-            ps = conn.prepareStatement("SELECT * FROM user_tbl WHERE Username=? AND Password=?");
+            
+            // Check if admin
+            ps = conn.prepareStatement("SELECT * FROM admin_tbl WHERE user_admin=? AND pw_admin=?");
             ps.setString(1, uName);
             ps.setString(2, pWord);
-
             rs = ps.executeQuery();
+            
             if (rs.next()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", uName);
                 session.setAttribute("login", true);
-                session.setAttribute("uName", uName);
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                session.setAttribute("role", "admin"); // Set role as admin
+                RequestDispatcher rd = request.getRequestDispatcher("Admin_DataGor.jsp");
                 rd.forward(request, response);
             } else {
-                response.sendRedirect("LoginError_1.jsp");
+                // Check if user
+                ps = conn.prepareStatement("SELECT * FROM user_tbl WHERE Username=? AND Password=?");
+                ps.setString(1, uName);
+                ps.setString(2, pWord);
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", uName);
+                    session.setAttribute("login", true);
+                    session.setAttribute("role", "user"); // Set role as user
+                    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                    rd.forward(request, response);
+                } else {
+                    response.sendRedirect("LoginError_1.jsp");
+                }
             }
         } catch (IOException | SQLException | ServletException e) {
             response.sendRedirect("LoginError_1.jsp");

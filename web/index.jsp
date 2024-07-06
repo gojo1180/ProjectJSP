@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/Home.css">
     </head>
     <body>
-            <section class="hero" id="hero-section">
+    <section class="hero" id="hero-section">
         <h1>Super Sport Application</h1>
         <p>Platform all-in-one untuk sewa lapangan, informasi mengenai olahraga badminton. Olahraga makin mudah dan menyenangkan!</p>
     </section>
@@ -77,5 +77,62 @@
         </div>
     </section>
     </body>
+    <script>
+        $(document).ready(function() {
+            var images = [
+                ['url(Image/GOR1.jpg)', 'url(GOR2.jpg)', 'url(GOR3.jpg)'],
+                ['url(BERITA1.jpeg)', 'url(BERITA2.jpg)', 'url(BERITA3.jpg)'],
+                ['url(MABAR1.jpg)', 'url(MABAR2.png)', 'url(MABAR3jpg.jpg)'] // Add your images here
+        ];
+            var currentIndices = [0, 0, 0];
+
+            function changeBackground(cardIndex) {
+                $('#background-' + cardIndex).css('background-image', images[cardIndex][currentIndices[cardIndex]]);
+            }
+
+            $('.arrow-left').click(function() {
+                var target = $(this).data('target');
+                currentIndices[target] = (currentIndices[target] - 1 + images[target].length) % images[target].length;
+                changeBackground(target);
+            });
+
+            $('.arrow-right').click(function() {
+                var target = $(this).data('target');
+                currentIndices[target] = (currentIndices[target] + 1) % images[target].length;
+                changeBackground(target);
+            });
+
+            // Initial background setup
+            changeBackground(0);
+            changeBackground(1);
+            changeBackground(2); // Initialize the new card background
+
+
+            var heroImages = [
+                'url(Image/FAJAR.webp)',
+                'url(Image/RIAN.webp)',
+                'url(Image/Gideon.webp)'
+            ];
+            var currentHeroIndex = 0;
+            function changeHeroBackground() {
+                $('#hero-section').css('background-image', heroImages[currentHeroIndex]);
+                currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
+            }
+            changeHeroBackground();
+            setInterval(changeHeroBackground, 60000); // 60000 ms = 1 menit
+    });
+
+    // Close modal
+    $('.modal .close').click(function() {
+        $('#login-modal').hide();
+    });
+
+    $(window).click(function(event) {
+        if ($(event.target).is('#login-modal')) {
+            $('#login-modal').hide();
+        }
+    });
+});
+    </script>
 </html>
 <%@include file="Footer.jsp" %>

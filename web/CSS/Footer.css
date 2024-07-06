@@ -5,7 +5,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500; 
+    font-weight: 500;
     font-style: normal;
     text-decoration: none;
     list-style: none;
@@ -25,13 +25,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    font-weight: bolder;
-    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--main-color);
     padding-top: 80px; /* Adjust this value to match the height of the header */
-    padding: 0;
 }
-
 /* Footer */
 .container {
     max-width: 1070px;

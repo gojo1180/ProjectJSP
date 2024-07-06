@@ -17,7 +17,7 @@
                         <span>
                             <h4>Incorrect Email or Password!<br><br>
                                 <div class="row button">
-                                    <input type="button" value="Back" onclick="window.location='index.jsp'">
+                                    <input type="button" value="Back" onclick="window.location='login.jsp'">
                                 </div>
                             </h4>
                         </span>
