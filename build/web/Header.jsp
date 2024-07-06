@@ -21,7 +21,7 @@
     <ul class="navbar">
         <li><a href="index.jsp">Home</a></li>
         <li><a href="GorServlet" title="Sewa Lapangan">Sewa Lapangan</a></li>
-        <li><a href="PageBerita.html">Blog</a></li>
+        <li><a href="PageBerita.jsp">Blog</a></li>
         <li><a href="About.html">About</a></li>
     </ul>
 
