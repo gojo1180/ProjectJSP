@@ -36,9 +36,10 @@
         <div class="gor-container">
             <%
                 List<Gor> gorList = (List<Gor>) request.getAttribute("gorList");
-                for (Gor gor : gorList) {
+                if (gorList != null) {
+                    for (Gor gor : gorList) {
             %>
-            <div class="gor-item" data-gor="<%= gor.getNama_Gor() %>" data-city="<%= gor.getKota() %>" onclick="navigateTo<%= gor.getNama_Gor().replaceAll(" ", "") %>()">
+            <a class="gor-item" href="OrderServlet?gorName=<%= gor.getNama_Gor() %>">
                 <%
                     String base64Image = gor.getImageBase64();
                     if (base64Image != null) {
@@ -56,8 +57,9 @@
                     <p>Rating: ⭐ <%= gor.getRating() %></p>
                     <p>Harga per jam: Rp <%= gor.getHarga() %></p>
                 </div>
-            </div>
+            </a>
             <%
+                    }
                 }
             %>
         </div>

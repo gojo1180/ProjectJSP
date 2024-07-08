@@ -59,6 +59,7 @@ public class GorServlet extends HttpServlet {
                 gor.setRating(resultSet.getDouble("Rating"));
                 gor.setHarga(resultSet.getDouble("Harga_Gor"));
                 gor.setImageBlob(resultSet.getBlob("Gambar"));
+                 gor.setLocation(resultSet.getString("Location"));
                 gorList.add(gor);
             }
         } catch (SQLException e) {

@@ -14,7 +14,16 @@ public class Gor {
     private double Rating;
     private double Harga;
     private Blob imageBlob;
+    private String Location;
 
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String Location) {
+        this.Location = Location;
+    }
+    
     public int getId_Gor() {
         return Id_Gor;
     }
