@@ -14,10 +14,29 @@ public class Gor {
     private double Rating;
     private double Harga;
     private Blob imageBlob;
-    private String Location;
+    private String Location; 
+    private String LocationLink;
+    private String Deskripsi;
+
+    public String getDeskripsi() {
+        return Deskripsi;
+    }
+
+    public void setDeskripsi(String Deskripsi) {
+        this.Deskripsi = Deskripsi;
+    }
+    
 
     public String getLocation() {
         return Location;
+    }
+
+    public String getLocationLink() {
+        return LocationLink;
+    }
+
+    public void setLocationLink(String LocationLink) {
+        this.LocationLink = LocationLink;
     }
 
     public void setLocation(String Location) {

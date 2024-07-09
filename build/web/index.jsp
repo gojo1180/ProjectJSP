@@ -11,7 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="CSS/Home.css">
+        <link rel="stylesheet" href="CSS/Home.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
     <section class="hero" id="hero-section">
@@ -24,7 +25,7 @@
             <div class="card-content">
                 <h2>Sewa lapangan dengan mudah dan cepat.</h2>
                 <p>Ada rencana berolahraga minggu ini tapi belum tahu mau main di mana? Atau tidak sempat jauh-jauh datang ke venue hanya untuk booking lapangan?</p>
-                <a href="PageSewaLapangan.html">Lihat Selengkapnya →</a>
+                <a href="GorServlet">Lihat Selengkapnya →</a>
             </div>
             <div class="card-background">
                 <button class="arrow-left" data-target="0">&#9664;</button>
@@ -36,7 +37,7 @@
             <div class="card-content">
                 <h2>Berita seputar olahraga badminton</h2>
                 <p>Informasi mengenai Dunia Badminton, jadwal kompetisi resmi BWF, hasil pertandingan, dan Press Match Conference</p>
-                <a href="PageBerita.html">Lihat Selengkapnya →</a>
+                <a href="PageBeritaServlet">Lihat Selengkapnya →</a>
             </div>
             <div class="card-background">
                 <button class="arrow-left" data-target="1">&#9664;</button>
@@ -58,7 +59,7 @@
                     <br>
                 </ul>
 
-                <a href="About.html" class="read-more">Lihat Selengkapnya →</a>
+                <a href="About.jsp" class="read-more">Lihat Selengkapnya →</a>
                 
             </div>
             <div class="card-background">
@@ -80,9 +81,9 @@
     <script>
         $(document).ready(function() {
             var images = [
-                ['url(Image/GOR1.jpg)', 'url(GOR2.jpg)', 'url(GOR3.jpg)'],
-                ['url(BERITA1.jpeg)', 'url(BERITA2.jpg)', 'url(BERITA3.jpg)'],
-                ['url(MABAR1.jpg)', 'url(MABAR2.png)', 'url(MABAR3jpg.jpg)'] // Add your images here
+                ['url(Image/GOR1.jpg)', 'url(Image/GOR2.jpg)', 'url(Image/GOR3.jpg)'],
+                ['url(Image/BERITA4.jpg)', 'url(Image/BERITA8.jpg)', 'url(Image/BERITA5.jpg)'],
+                ['url(Image/MABAR1.jpg)', 'url(Image/MABAR2.png)', 'url(Image/MABAR3jpg.jpg)'] // Add your images here
         ];
             var currentIndices = [0, 0, 0];
 
@@ -109,29 +110,18 @@
 
 
             var heroImages = [
-                'url(Image/FAJAR.webp)',
-                'url(Image/RIAN.webp)',
-                'url(Image/Gideon.webp)'
+                'url(Image/ChicoHome.jpg)',
+                'url(Image/ChristieHome.jpg)',
+                'url(Image/GintingHome.jpeg)'
             ];
+            
             var currentHeroIndex = 0;
             function changeHeroBackground() {
                 $('#hero-section').css('background-image', heroImages[currentHeroIndex]);
                 currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
             }
             changeHeroBackground();
-            setInterval(changeHeroBackground, 60000); // 60000 ms = 1 menit
-    });
-
-    // Close modal
-    $('.modal .close').click(function() {
-        $('#login-modal').hide();
-    });
-
-    $(window).click(function(event) {
-        if ($(event.target).is('#login-modal')) {
-            $('#login-modal').hide();
-        }
-    });
+            setInterval(changeHeroBackground, 5000); // 60000 ms = 1 menit
 });
     </script>
 </html>

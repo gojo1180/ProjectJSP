@@ -25,6 +25,7 @@
             <section class="article-content">
                 <p><%= berita.getKonten().replace("\n", "<br>") %></p>    
             </section>
+            <button class="back-btn" onclick="window.location='PageBeritaServlet'">Back</button>
             <%
                 } else {
             %>

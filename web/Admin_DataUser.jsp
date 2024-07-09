@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="CSS/Admin.css">
     </head>
     <body>
-        <div class="container">
+        <div class="main-content    ">
             <h1>Data User</h1>
             <table border="1">
                 <tr>

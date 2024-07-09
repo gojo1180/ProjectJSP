@@ -35,6 +35,8 @@ public class OrderServlet extends HttpServlet {
                         selectedGor.setHarga(resultSet.getDouble("Harga_Gor"));
                         selectedGor.setImageBlob(resultSet.getBlob("Gambar"));
                         selectedGor.setLocation(resultSet.getString("Location"));
+                        selectedGor.setLocationLink(resultSet.getString("Location_Link"));
+                        selectedGor.setDeskripsi(resultSet.getString("Deskripsi_Gor"));
                     }
                 }
             }

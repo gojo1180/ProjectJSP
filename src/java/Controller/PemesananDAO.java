@@ -7,6 +7,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PemesananDAO {
     private Connection connection;
@@ -29,18 +31,18 @@ public class PemesananDAO {
         }
     }
 
-    public boolean isBookingExists(String court, Date date, String time) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM pemesanan_tbl WHERE court = ? AND date = ? AND time = ?";
+    public List<String> getBookedTimes(String court, Date date) throws SQLException {
+        List<String> bookedTimes = new ArrayList<>();
+        String sql = "SELECT time FROM pemesanan_tbl WHERE court = ? AND date = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, court);
             stmt.setDate(2, date);
-            stmt.setString(3, time);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0;
+                while (rs.next()) {
+                    bookedTimes.add(rs.getString("time"));
                 }
             }
         }
-        return false;
+        return bookedTimes;
     }
 }

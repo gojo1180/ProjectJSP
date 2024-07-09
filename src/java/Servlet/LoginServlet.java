@@ -41,8 +41,8 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", uName);
                 session.setAttribute("login", true);
                 session.setAttribute("role", "admin"); // Set role as admin
-                RequestDispatcher rd = request.getRequestDispatcher("Admin_DataGor.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("GorDataServlet");
+                return;
             } else {
                 // Check if user
                 ps = conn.prepareStatement("SELECT * FROM user_tbl WHERE Username=? AND Password=?");

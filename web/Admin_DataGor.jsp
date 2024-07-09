@@ -8,11 +8,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Admin Page</title>
     <link rel="stylesheet" href="CSS/Admin.css">
-    <link rel="stylesheet" href="CSS/Modal.css">
     <script src="JS/Modal.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="main-content">
         <h1>Data GOR</h1>
         <table border="1">
             <tr>
@@ -21,6 +20,9 @@
                 <th>Kota</th>
                 <th>Rating</th>
                 <th>Harga</th>
+                <th>Lokasi</th>
+                <th>Link Lokasi</th>
+                <th>Deskripsi</th>
                 <th>Actions</th>
             </tr>
             <%
@@ -47,9 +49,12 @@
                 <td><%= gor.getKota() %></td>
                 <td><%= gor.getRating() %></td>
                 <td><%= gor.getHarga() %></td>
-                <td>
-                    <button class="btn-more" id="update" onclick="openUpdateModal(<%= gor.getId_Gor() %>, '<%= gor.getNama_Gor() %>', '<%= gor.getKota() %>', <%= gor.getRating() %>, <%= gor.getHarga() %>, '<%= base64Image %>')">Update</button>
-                    <button class="btn-more" id="delete" onclick="location.href='DeleteGorServlet?id=<%= gor.getId_Gor() %>'">Delete</button>
+                <td><%= gor.getLocation()%></td>
+                <td><%= gor.getLocationLink()%></td>
+                <td><%= gor.getDeskripsi()%></td>
+                <td class="actions-btn">
+                    <button class="btn-more" id="update" onclick="openUpdateModal(<%= gor.getId_Gor() %>, '<%= gor.getNama_Gor() %>', '<%= gor.getKota() %>', <%= gor.getRating() %>, <%= gor.getHarga() %>, '<%= gor.getLocation()%>', '<%= gor.getLocationLink()%>',  '<%= gor.getDeskripsi()%>', '<%= base64Image %>')">Update</button>
+                    <button class="btn-more" id="delete" onclick="openDeleteModal(<%= gor.getId_Gor() %>)">Delete</button>
                 </td>
             </tr>
             <% 
@@ -61,7 +66,7 @@
     </div>
 
     <!-- Add GOR Modal -->
-    <div id="addModal" class="modal">
+    <div id="addModalGor" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddModal()">&times;</span>
             <h2>Add GOR</h2>
@@ -75,6 +80,12 @@
                 <input type="number" step="0.1" id="rating" name="rating" required><br>
                 <label for="harga">Harga:</label><br>
                 <input type="number" step="0.01" id="harga" name="harga" required><br>
+                <label for="location">Lokasi:</label><br>
+                <input type="text" id="location" name="location" required><br>
+                <label for="locationLink">Link Lokasi:</label><br>
+                <input type="text" id="locationLink" name="locationLink" required><br>
+                <label for="Deskripsi">Deskripsi:</label><br>
+                <textarea rows="3" cols="16" id="Deskripsi" name="Deskripsi" required></textarea><br>
                 <label for="image">Image:</label><br>
                 <input type="file" id="image" name="image" accept="image/*" required><br>
                 <input type="hidden" id="imageBase64" name="imageBase64"><br>
@@ -84,7 +95,7 @@
     </div>
 
     <!-- Update GOR Modal -->
-    <div id="updateModal" class="modal">
+    <div id="updateModalGor" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeUpdateModal()">&times;</span>
             <h2>Update GOR</h2>
@@ -99,18 +110,38 @@
                 <input type="number" step="0.1" id="updateRating" name="rating" required><br>
                 <label for="updateHarga">Harga:</label><br>
                 <input type="number" step="0.01" id="updateHarga" name="harga" required><br>
-                <label for="updateImage">Image:</label><br>
+                <label for="updateLocation">Lokasi:</label><br>
+                <input type="text" id="updateLocation" name="location" required><br>
+                <label for="updateLocationLink">Lokasi Link:</label><br>
+                <input type="text" id="updateLocationLink" name="locationLink" required><br>
+                <label for="updateDeskripsi">Deskripsi:</label><br>
+                <textarea rows="3" cols="16" id="updateDeskripsi" name="Deskripsi" required></textarea><br>
+                <label for="updateImage">Image:</label><br>                                                             
                 <input type="file" id="updateImage" name="image" accept="image/*"><br>
                 <input type="hidden" id="updateImageBase64" name="imageBase64"><br>
                 <button type="submit">Update GOR</button>
             </form>
         </div>
     </div>
+    
+    <div id="deleteModalGor" class="modal">
+        <div class="modal-confirmation">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete this Gor?</p>
+            <div class="button-container">
+                <button id="confirmDelete" class="btn-delete">Delete</button>
+                <button onclick="closeDeleteModal()" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Get the modals
-        var addModal = document.getElementById('addModal');
-        var updateModal = document.getElementById('updateModal');
+        var addModal = document.getElementById('addModalGor');
+        var updateModal = document.getElementById('updateModalGor');
+        var deleteModal = document.getElementById('deleteModalGor');
+        var deleteButton = document.getElementById('confirmDelete');
 
         // Open the add modal
         function openAddModal() {
@@ -121,14 +152,30 @@
         function closeAddModal() {
             addModal.style.display = "none";
         }
+        
+        // Open the delete modal with the id of the GOR to be deleted
+        function openDeleteModal(id) {
+            deleteModal.style.display = "block";
+            deleteButton.onclick = function() {
+                location.href = 'DeleteGorServlet?id=' + id;
+            };
+        }
+
+        // Close the delete modal
+        function closeDeleteModal() {
+            deleteModal.style.display = "none";
+        }
 
         // Open the update modal with pre-filled data
-        function openUpdateModal(id, namaGor, kota, rating, harga, image) {
+        function openUpdateModal(id, namaGor, kota, rating, harga, location, locationLink, Deskripsi, image) {
             document.getElementById('updateId').value = id;
             document.getElementById('updateNamaGor').value = namaGor;
             document.getElementById('updateKota').value = kota;
             document.getElementById('updateRating').value = rating;
             document.getElementById('updateHarga').value = harga;
+            document.getElementById('updateLocation').value = location;
+            document.getElementById('updateLocationLink').value = locationLink;
+            document.getElementById('updateDeskripsi').value = Deskripsi;
             document.getElementById('updateImageBase64').value = image;
 
             updateModal.style.display = "block";
@@ -174,6 +221,9 @@
             }
             if (event.target == updateModal) {
                 closeUpdateModal();
+            }
+            if (event.target == deleteModal) {
+                closeDeleteModal();
             }
         }
     </script>

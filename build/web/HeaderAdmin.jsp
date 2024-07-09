@@ -6,7 +6,7 @@
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-        <link rel="stylesheet" href="CSS/Header.css">
+        <link rel="stylesheet" href="CSS/HeaderAdmin.css">
     </head>
     <body>
         <header>
@@ -18,8 +18,17 @@
         </a>
         
         <div class="main">
-            <button id="gor-button" onclick="location.href='GorDataServlet'">Data GOR</button>
+            <div class="dropdown">
+                <button class="dropbtn">Data <i class="ri-arrow-down-s-line"></i></button>
+                <div class="dropdown-content">
+                    <a id="gor-button" onclick="location.href='GorDataServlet'">Data GOR</a>
+                    <a user-button" onclick="location.href='UserServlet'">Data User</a>
+                    <a id="berita-button" onclick="location.href='BeritaDataServlet'">Data Berita</a>
+                </div>
+            </div>
+<!--            <button id="gor-button" onclick="location.href='GorDataServlet'">Data GOR</button>
             <button id="user-button" onclick="location.href='UserServlet'">Data User</button>
+            <button id="berita-button" onclick="location.href='BeritaDataServlet'">Data Berita</button>-->
             <button id="logout-button" onclick="location.href='LogoutServlet'" class="log-out">Logout</button>
         </div>
         <div class="bx bx-menu" id="menu-icon"></div>

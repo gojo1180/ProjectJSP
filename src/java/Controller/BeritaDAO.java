@@ -70,5 +70,48 @@ public class BeritaDAO {
 
         return berita;
     }
+    
+    public void addBerita(Berita berita) {
+        String sql = "INSERT INTO berita_tbl (Judul_Berita, Penulis_Berita, Tanggal_Berita, Konten_Berita, Gambar) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, berita.getJudul());
+            statement.setString(2, berita.getPenulis());
+            statement.setString(3, berita.getTanggal());
+            statement.setString(4, berita.getKonten());
+            statement.setBlob(5, berita.getImageBlob());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateBerita(Berita berita) {
+        String sql = "UPDATE berita_tbl SET Judul_Berita=?, Penulis_Berita=?, Tanggal_Berita=?, Konten_Berita=?, Gambar=? WHERE Id_Berita=?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, berita.getJudul());
+            statement.setString(2, berita.getPenulis());
+            statement.setString(3, berita.getTanggal());
+            statement.setString(4, berita.getKonten());
+            statement.setBlob(5, berita.getImageBlob());
+            statement.setInt(6, berita.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteBerita(int id) {
+        String sql = "DELETE FROM berita_tbl WHERE Id_Berita=?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
 

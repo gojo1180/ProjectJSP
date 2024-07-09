@@ -32,6 +32,9 @@ public class UpdateGorServlet extends HttpServlet {
             String kota = request.getParameter("kota");
             double rating = Double.parseDouble(request.getParameter("rating"));
             double harga = Double.parseDouble(request.getParameter("harga"));
+            String Location = request.getParameter("location");
+            String LocationLink = request.getParameter("locationLink");
+            String Deskripsi = request.getParameter("Deskripsi");
             String updateImageBase64 = request.getParameter("imageBase64");
 
             Gor gor = new Gor();
@@ -40,6 +43,9 @@ public class UpdateGorServlet extends HttpServlet {
             gor.setKota(kota);
             gor.setRating(rating);
             gor.setHarga(harga);
+            gor.setLocation(Location);
+            gor.setLocationLink(LocationLink);
+            gor.setDeskripsi(Deskripsi);
             if (updateImageBase64 != null && !updateImageBase64.isEmpty()) {
                 gor.setImageBlob(new SerialBlob(Base64.getDecoder().decode(updateImageBase64)));
             }

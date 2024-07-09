@@ -21,15 +21,15 @@
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="About.html">About Us</a></li>
-                        <li><a href="Privacy&Policy.html">Privacy & Policy</a></li>
-                        <li><a href="Terms&Conditions.html">Terms & Condition</a></li>
+                        <li><a href="About.jsp">About Us</a></li>
+                        <li><a href="Privacy&Policy.jsp">Privacy & Policy</a></li>
+                        <li><a href="Terms&Conditions.jsp">Terms & Condition</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
                     <ul>
-                        <li><a href="ContactUs.html">Contact</a></li>
+                        <li><a href="ContactUs.jsp">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

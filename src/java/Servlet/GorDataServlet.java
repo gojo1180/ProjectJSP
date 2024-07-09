@@ -52,6 +52,9 @@ public class GorDataServlet extends HttpServlet {
             double rating = Double.parseDouble(request.getParameter("rating"));
             double harga = Double.parseDouble(request.getParameter("harga"));
             String imageBase64 = request.getParameter("imageBase64");
+            String location = request.getParameter("location");
+            String locationLink = request.getParameter("locationLink");
+            String Deskripsi = request.getParameter("Deskripsi");
 
             Gor gor = new Gor();
             gor.setNama_Gor(namaGor);
@@ -59,7 +62,10 @@ public class GorDataServlet extends HttpServlet {
             gor.setRating(rating);
             gor.setHarga(harga);
             gor.setImageBlob(new SerialBlob(Base64.getDecoder().decode(imageBase64)));
-
+            gor.setLocation(location);
+            gor.setLocationLink(locationLink);
+            gor.setDeskripsi(Deskripsi);
+            
             gorDAO.addGor(gor);
         } catch (Exception e) {
             e.printStackTrace();

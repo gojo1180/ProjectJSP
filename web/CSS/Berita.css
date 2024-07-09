@@ -258,98 +258,27 @@ main {
 .article-content p {
     margin-bottom: 15px;
     text-align: justify;
+    word-wrap: break-word; /* Membungkus kata yang panjang */
+    overflow-wrap: break-word; /* Membungkus kata yang panjang */
+    word-break: break-word; /* Membungkus kata yang panjang */
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 400;
 }
 
-/* Footer */
-.container {
-    max-width: 1070px;
-    margin: auto;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.footer {
-    background-color: var(--bg-color);
-    box-shadow: 0 -5px 5px -5px #00000033;
-    padding: 70px 0;
-    position: relative;
+.back-btn{
+    padding: 3px 10px;
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
     width: 100%;
 }
 
-.footer-col {
-    width: 25%;
-    padding: 0 12px;
+.back-btn:hover{
+    background-color: var(--text-color);
 }
-
-.footer-col h4 {
-    font-size: 18px;
-    color: var(--text-color);
-    text-transform: capitalize;
-    margin-bottom: 20px;
-    font-weight: 800;
-    position: relative;
-}
-
-.footer-col h4::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -15%;
-    background-color: var(--main-color);
-    height: 2px;
-    box-sizing: border-box;
-    width: 70px;
-}
-
-.footer-col ul li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-    font-size: 16px;
-    text-transform: capitalize;
-    font-weight: 500;
-    color: var(--darkW-color);
-    display: block;
-    transition: all 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-    color: var(--main-color);
-}
-
-.footer-col .social-links a {
-    display: inline-block;
-    height: 40px;
-    width: 40px;
-    background-color: var(--darkW-color);
-    margin: 0 10px 10px 0;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    color: var(--bg-color);
-    transition: all 0.25s ease;
-}
-
-.footer-col .social-links a:hover {
-    color: var(--bg-color);
-    background-color: var(--main-color);
-}
-
-@media (max-width: 767px) {
-    .footer-col {
-        width: 50%;
-        margin-bottom: 30px;
-    }
-}
-
-@media (max-width: 574px) {
-    .footer-col {
-        width: 100%;
-    }
-}
-/* Footer */

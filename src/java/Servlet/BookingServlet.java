@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,8 +36,11 @@ public class BookingServlet extends HttpServlet {
         PemesananDAO pemesananDAO = new PemesananDAO(connection);
 
         try {
+            List<String> bookedTimes = pemesananDAO.getBookedTimes(court, date);
+            request.setAttribute("bookedTimes", bookedTimes);
+
             for (String time : times) {
-                if (pemesananDAO.isBookingExists(court, date, time)) {
+                if (bookedTimes.contains(time)) {
                     response.sendRedirect("BookingConflict.jsp");
                     return;
                 }

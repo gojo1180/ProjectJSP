@@ -12,12 +12,14 @@
 
     String username = null;
     String email = null;
+    boolean isLoggedIn = false;
 
     if (session != null && session.getAttribute("user") != null) {
         username = (String) session.getAttribute("user");
         userDAO UserDAO = new userDAO();
         User user = UserDAO.getUserByUsername(username);
         email = (user != null) ? user.getEmail() : "";
+        isLoggedIn = true;
     }
 %>
 
@@ -126,23 +128,10 @@
                         <span style="font-size: 17px; font-weight: 800; color: var(--main-color);"><i class="ri-arrow-right-s-fill" style="color: var(--text-color);"></i>Deskripsi</span>
                     </div>
                     <p>
-                        TIGA LAPANGAN BULUTANGKIS DI JATIRAWASARI BERKUALITAS INTERNATIONAL DAN BERKARPET VINYL
-                        <br><br>
-                        BUKA : SETIAP HARI JAM 06.00 - 00.00
-                        <br><br>
-                        FASILITAS : PARKIR, TOILET, KAMAR GANTI, MUSHOLA KANTIN, SMOKING AREA DAN WIFI.
-                        <br><br>
-                        TERSEDIA : SHUTTLECOCKS, GRIP, PENYEWAAN RAKET DAN SEPATU.
-                        TERSEDIA ANEKA MAKANAN & MINUMAN
-                        <br><br>
-                        PEMAIN WAJIB MENGGUNAKAN SEPATU BULUTANGKIS.
-                        <br><br>
-                        DILARANG KERAS!!!
-                        1. MEROKOK / VAPING DIAREA LAPANGAN DAN TEMPAT DUDUK PEMAIN (untuk yang merokok tersedia di Smoking Area )
-                        2. MEMBAWA MAKANAN DAN MINUMAN DARI LUAR.
-                        3. MEMBAWA HEWAN.
+                        <%= selectedGor.getDeskripsi()%>
                     </p>
                 </article>
+            </div>
 
                 <div class="h-line"></div>
                 
@@ -158,7 +147,7 @@
 
                         <div class="locfaci">
                             <p class="judul">Location</p>
-                            <a href="https://maps.app.goo.gl/tGBTEHKK5jWj3C9XA" target="_blank">
+                            <a href="<%= selectedGor.getLocationLink() %>" target="_blank">
                                 <div class="maps">
                                     <div class="text">
                                         <p><%= selectedGor.getLocation() %></p>
@@ -205,7 +194,6 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         <!-- Booking Modal -->
         <div id="bookingModal" class="modal">
@@ -250,11 +238,10 @@
                                 <option value="14:00-15:00">14:00 - 15:00</option>
                                 <option value="15:00-16:00">15:00 - 16:00</option>
                                 <option value="16:00-17:00">16:00 - 17:00</option>
-                                <option value="17:00-18:00">17:00 - 18:00</option>
-                                <option value="18:00-19:00">18:00 - 19:00</option>
-                                <option value="19:00-20:00">19:00 - 20:00</option>
-                                <option value="20:00-21:00">20:00 - 21:00</option>
-                                <option value="21:00-22:00">21:00 - 22:00</option>
+                                <option value="17:00-18:00">18:00 - 19:00</option>
+                                <option value="18:00-19:00">19:00 - 20:00</option>
+                                <option value="19:00-20:00">20:00 - 21:00</option>
+                                <option value="20:00-21:00">21:00 - 22:00</option>
                             </select>
                         </div>
                         <div>
@@ -283,9 +270,13 @@
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
 
-            // When the user clicks the button, open the modal 
+            // When the user clicks the button, open the modal if logged in, else alert
             btn.onclick = function() {
-                modal.style.display = "block";
+                if (<%= isLoggedIn %>) {
+                    modal.style.display = "block";
+                } else {
+                    alert("Please log in to book a court.");
+                }
             }
 
             // When the user clicks on <span> (x), close the modal

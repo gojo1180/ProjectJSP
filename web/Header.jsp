@@ -7,7 +7,7 @@
     <title>Header</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="CSS/Header.css">
+<!--    <link rel="stylesheet" href="CSS/Header.css">-->
 </head>
 <body>
 <header>
@@ -22,7 +22,7 @@
         <li><a href="index.jsp">Home</a></li>
         <li><a href="GorServlet" title="Sewa Lapangan">Sewa Lapangan</a></li>
         <li><a href="PageBeritaServlet">Blog</a></li>
-        <li><a href="About.html">About</a></li>
+        <li><a href="About.jsp">About</a></li>
     </ul>
 
     <div class="main">
@@ -30,7 +30,7 @@
             if (session != null && session.getAttribute("user") != null) {
                 String username = (String) session.getAttribute("user");
         %>
-        <a href="Profile.jsp" class="user"><i class="ri-user-fill"></i><%= username %></a>
+        <a href="Profile.jsp" class="user"><i class="ri-user-fill"></i></a>
             <button id="logout-button" onclick="location.href='LogoutServlet'" class="log-out">Logout</button>
         <%
             } else {
