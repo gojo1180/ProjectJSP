@@ -66,7 +66,7 @@
                     <ul>
                         <li class="active"><a href="Profile.jsp">Data Diri</a></li>
                         <li><a href="UbahKataSandi.jsp">Ubah Kata Sandi</a></li>
-                        <li><a href="RiwayatPemesanan.jsp">Riwayat Pemesanan</a></li>
+                        <li><a href="History.jsp">Riwayat Pemesanan</a></li>
                     </ul>
                 </div>
                 <div class="main-content">

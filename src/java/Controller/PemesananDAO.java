@@ -45,4 +45,27 @@ public class PemesananDAO {
             statement.executeUpdate();
         }
     }
+    
+ public List<Pemesanan> getBookingHistoryByUser(String name) throws SQLException {
+    List<Pemesanan> bookingHistory = new ArrayList<>();
+    String sql = "SELECT * FROM pemesanan_tbl WHERE Nama_Pemesan = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, name);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Pemesanan booking = new Pemesanan();
+                booking.setName(resultSet.getString("Nama_Pemesan"));
+                booking.setEmail(resultSet.getString("Email_Pemesan"));
+                booking.setCourt(resultSet.getString("court"));
+                booking.setDate(resultSet.getDate("date"));
+                booking.setTime(resultSet.getString("Time"));
+                booking.setHarga(resultSet.getDouble("Harga"));
+                booking.setGor_NamaGor(resultSet.getString("Nama_Gor"));
+                bookingHistory.add(booking);
+            }
+        }
+    }
+    return bookingHistory;
+}
+    
 }
