@@ -108,6 +108,10 @@
             .modal-body button:hover {
                 background-color: var(--main-color-hover);
             }
+            .modal-body select option.booked {
+                background-color: red;
+                color: white;
+            }
         </style>
     </head>
     <body>
@@ -133,67 +137,67 @@
                 </article>
             </div>
 
-                <div class="h-line"></div>
-                
-                <div class="side-bar">
-                    <div class="side-content">
-                        <% if (selectedGor != null) { %>
-                        <div class="gor-desc">
-                            <p id="gor-name"><%= selectedGor.getNama_Gor() %></p>
-                            <span id="rating"><i class="ri-star-fill"></i> <%= selectedGor.getRating() %></span>
-                        </div>
+            <div class="h-line"></div>
 
-                        <div class="h-line-side"></div>
-
-                        <div class="locfaci">
-                            <p class="judul">Location</p>
-                            <a href="<%= selectedGor.getLocationLink() %>" target="_blank">
-                                <div class="maps">
-                                    <div class="text">
-                                        <p><%= selectedGor.getLocation() %></p>
-                                    </div>
-                                    <div class="pic">
-                                        <i class="ri-map-pin-2-fill"></i>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <p class="judul">Facilities</p>
-                            <div class="facilities">
-                                <div class="facil-list">
-                                    <div class="facil-icon"><i class="ri-car-fill"></i></div>
-                                    <div class="facil-text">Parkir <br>Mobil</div>
-                                </div>
-                                <div class="facil-list">
-                                    <div class="facil-icon"><i class="ri-motorbike-fill"></i></div>
-                                    <div class="facil-text">Parkir Motor</div>
-                                </div>
-                                <div class="facil-list">
-                                    <div class="facil-icon"><i class="ri-cup-fill"></i></div>
-                                    <div class="facil-text">Jual Minuman</div>
-                                </div>
-                                <div class="facil-list">
-                                    <div class="facil-icon"><i class="ri-bowl-fill"></i></div>
-                                    <div class="facil-text">Jual Makanan</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="h-line-side"></div>
-                        <div class="order">
-                            <div class="judul">Mulai Dari</div>
-                            <div class="subjudul">Rp <%= selectedGor.getHarga() %>/sesi</div>
-                            <div class="buttonPesan requires-login">
-                                <div class="keterangan">Pesan Sekarang</div>
-                            </div>
-                        </div>  
-                        <% } else { %>
-                        <div class="gor-desc">
-                            <p id="gor-name">GOR Not Available</p>
-                        </div>
-                        <% } %>
+            <div class="side-bar">
+                <div class="side-content">
+                    <% if (selectedGor != null) { %>
+                    <div class="gor-desc">
+                        <p id="gor-name"><%= selectedGor.getNama_Gor() %></p>
+                        <span id="rating"><i class="ri-star-fill"></i> <%= selectedGor.getRating() %></span>
                     </div>
+
+                    <div class="h-line-side"></div>
+
+                    <div class="locfaci">
+                        <p class="judul">Location</p>
+                        <a href="<%= selectedGor.getLocationLink() %>" target="_blank">
+                            <div class="maps">
+                                <div class="text">
+                                    <p><%= selectedGor.getLocation() %></p>
+                                </div>
+                                <div class="pic">
+                                    <i class="ri-map-pin-2-fill"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <p class="judul">Facilities</p>
+                        <div class="facilities">
+                            <div class="facil-list">
+                                <div class="facil-icon"><i class="ri-car-fill"></i></div>
+                                <div class="facil-text">Parkir <br>Mobil</div>
+                            </div>
+                            <div class="facil-list">
+                                <div class="facil-icon"><i class="ri-motorbike-fill"></i></div>
+                                <div class="facil-text">Parkir Motor</div>
+                            </div>
+                            <div class="facil-list">
+                                <div class="facil-icon"><i class="ri-cup-fill"></i></div>
+                                <div class="facil-text">Jual Minuman</div>
+                            </div>
+                            <div class="facil-list">
+                                <div class="facil-icon"><i class="ri-bowl-fill"></i></div>
+                                <div class="facil-text">Jual Makanan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-line-side"></div>
+                    <div class="order">
+                        <div class="judul">Mulai Dari</div>
+                        <div class="subjudul">Rp <%= selectedGor.getHarga() %>/sesi</div>
+                        <div class="buttonPesan requires-login">
+                            <div class="keterangan">Pesan Sekarang</div>
+                        </div>
+                    </div>  
+                    <% } else { %>
+                    <div class="gor-desc">
+                        <p id="gor-name">GOR Not Available</p>
+                    </div>
+                    <% } %>
                 </div>
             </div>
+        </div>
 
         <!-- Booking Modal -->
         <div id="bookingModal" class="modal">
@@ -289,6 +293,38 @@
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
+            }
+
+            // Fetch booked time slots when the date is selected
+            document.getElementById('date').addEventListener('change', function() {
+                var selectedDate = this.value;
+                var gorName = '<%= selectedGor != null ? selectedGor.getNama_Gor() : "" %>';
+                fetchBookedTimeSlots(gorName, selectedDate);
+            });
+
+            function fetchBookedTimeSlots(gorName, date) {
+                fetch('BookedServlet?gorName=' + encodeURIComponent(gorName) + '&date=' + encodeURIComponent(date))
+                    .then(response => response.json())
+                    .then(bookedTimeSlots => {
+                        var timeSelect = document.getElementById('time');
+                        var options = timeSelect.options;
+
+                        // Reset all options
+                        for (var i = 0; i < options.length; i++) {
+                            options[i].disabled = false;
+                            options[i].classList.remove('booked');
+                        }
+
+                        // Disable booked time slots
+                        bookedTimeSlots.forEach(timeSlot => {
+                            for (var i = 0; i < options.length; i++) {
+                                if (options[i].value === timeSlot) {
+                                    options[i].disabled = true;
+                                    options[i].classList.add('booked');
+                                }
+                            }
+                        });
+                    });
             }
         </script>
     </body>
