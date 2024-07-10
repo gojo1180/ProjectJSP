@@ -230,7 +230,7 @@
                         </div>
                         <div>
                             <label for="time">Pilih Waktu:</label>
-                            <select id="time" name="time" required>
+                            <select id="time" name="time" onclick="" required>
                                 <option value="6:00-7:00">6:00 - 7:00</option>
                                 <option value="7:00-8:00">7:00 - 8:00</option>
                                 <option value="8:00-9:00">8:00 - 9:00</option>
@@ -303,7 +303,7 @@
             });
 
             function fetchBookedTimeSlots(gorName, date) {
-                fetch('BookedServlet?gorName=' + encodeURIComponent(gorName) + '&date=' + encodeURIComponent(date))
+                fetch('BookedTimeSlotsServlet?gorName=' + encodeURIComponent(gorName) + '&date=' + encodeURIComponent(date))
                     .then(response => response.json())
                     .then(bookedTimeSlots => {
                         var timeSelect = document.getElementById('time');
@@ -331,3 +331,4 @@
 </html>
 
 <%@include file="Footer.jsp" %>
+

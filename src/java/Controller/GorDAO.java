@@ -45,7 +45,7 @@ public class GorDAO {
     }
 
     public void addGor(Gor gor) {
-        String sql = "INSERT INTO gor (Nama_Gor, Kota, Rating, Harga_Gor, Gambar, Location, Location_Link, Deskripsi_Got) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO gor (Nama_Gor, Kota, Rating, Harga_Gor, Gambar, Location, Location_Link, Deskripsi_Gor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, gor.getNama_Gor());

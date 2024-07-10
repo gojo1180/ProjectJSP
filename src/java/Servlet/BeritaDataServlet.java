@@ -52,6 +52,8 @@ public class BeritaDataServlet extends HttpServlet {
             String tanggal = request.getParameter("tanggal");
             String konten = request.getParameter("konten");
             String imageBase64 = request.getParameter("imageBase64");
+            
+            konten = konten.replace("\n","<br>").replace("\r","");
 
             Berita berita = new Berita();
             berita.setJudul(judul);

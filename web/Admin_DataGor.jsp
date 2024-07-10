@@ -27,8 +27,10 @@
             </tr>
             <%
                 ArrayList<Gor> gorList = (ArrayList<Gor>) request.getAttribute("gorList");
+                
                 if (gorList != null) {
                     for (Gor gor : gorList) {
+                    String desktrim = gor.getDeskripsi().replaceAll("\n","");
             %>
             <tr>
                 <td>
@@ -45,15 +47,20 @@
                         }
                     %>
                 </td>
-                <td><%= gor.getNama_Gor() %></td>
-                <td><%= gor.getKota() %></td>
-                <td><%= gor.getRating() %></td>
-                <td><%= gor.getHarga() %></td>
-                <td><%= gor.getLocation()%></td>
-                <td><%= gor.getLocationLink()%></td>
-                <td><%= gor.getDeskripsi()%></td>
+                <td class="isi-td"><%= gor.getNama_Gor() %></td>
+                <td class="isi-td"><%= gor.getKota() %></td>
+                <td class="isi-td"><%= gor.getRating() %></td>
+                <td class="isi-td"><%= gor.getHarga() %></td>
+                <td class="isi-td"><%= gor.getLocation()%></td>
+                <td class="isi-td">
+                    <a href ="<%= gor.getLocationLink()%>">Link</a>
+                </td>
+                <td class="konten-td">
+                    <%= gor.getDeskripsi().replace("\n","<br>")%>
+                </td>
+                <%!  %>
                 <td class="actions-btn">
-                    <button class="btn-more" id="update" onclick="openUpdateModal(<%= gor.getId_Gor() %>, '<%= gor.getNama_Gor() %>', '<%= gor.getKota() %>', <%= gor.getRating() %>, <%= gor.getHarga() %>, '<%= gor.getLocation()%>', '<%= gor.getLocationLink()%>',  '<%= gor.getDeskripsi()%>', '<%= base64Image %>')">Update</button>
+                        <button class="btn-more" id="update" onclick="openUpdateModal(<%= gor.getId_Gor() %>, '<%= gor.getNama_Gor() %>', '<%= gor.getKota() %>', <%= gor.getRating() %>, <%= gor.getHarga() %>, '<%= gor.getLocation()%>', '<%= gor.getLocationLink()%>',  '<%=desktrim%>', '<%= base64Image %>')">Update</button>
                     <button class="btn-more" id="delete" onclick="openDeleteModal(<%= gor.getId_Gor() %>)">Delete</button>
                 </td>
             </tr>
@@ -103,19 +110,19 @@
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" id="updateId" name="id">
                 <label for="updateNamaGor">Nama GOR:</label><br>
-                <input type="text" id="updateNamaGor" name="namaGor" required><br>
+                <input type="text" id="updateNamaGor" name="namaGor" ><br>
                 <label for="updateKota">Kota:</label><br>
-                <input type="text" id="updateKota" name="kota" required><br>
+                <input type="text" id="updateKota" name="kota" ><br>
                 <label for="updateRating">Rating:</label><br>
-                <input type="number" step="0.1" id="updateRating" name="rating" required><br>
+                <input type="number" step="0.1" id="updateRating" name="rating" ><br>
                 <label for="updateHarga">Harga:</label><br>
-                <input type="number" step="0.01" id="updateHarga" name="harga" required><br>
+                <input type="number" step="0.01" id="updateHarga" name="harga" ><br>
                 <label for="updateLocation">Lokasi:</label><br>
-                <input type="text" id="updateLocation" name="location" required><br>
+                <input type="text" id="updateLocation" name="location" ><br>
                 <label for="updateLocationLink">Lokasi Link:</label><br>
-                <input type="text" id="updateLocationLink" name="locationLink" required><br>
+                <input type="text" id="updateLocationLink" name="locationLink" ><br>
                 <label for="updateDeskripsi">Deskripsi:</label><br>
-                <textarea rows="3" cols="16" id="updateDeskripsi" name="Deskripsi" required></textarea><br>
+                <textarea rows="3" cols="16" id="updateDeskripsi" name="Deskripsi" ></textarea><br>
                 <label for="updateImage">Image:</label><br>                                                             
                 <input type="file" id="updateImage" name="image" accept="image/*"><br>
                 <input type="hidden" id="updateImageBase64" name="imageBase64"><br>
@@ -175,7 +182,7 @@
             document.getElementById('updateHarga').value = harga;
             document.getElementById('updateLocation').value = location;
             document.getElementById('updateLocationLink').value = locationLink;
-            document.getElementById('updateDeskripsi').value = Deskripsi;
+            document.getElementById('updateDeskripsi').value = Deskripsi.replaceAll("<br>","\n");
             document.getElementById('updateImageBase64').value = image;
 
             updateModal.style.display = "block";
@@ -216,13 +223,13 @@
 
         // Close the modals when clicking outside of them
         window.onclick = function(event) {
-            if (event.target == addModal) {
+            if (event.target === addModal) {
                 closeAddModal();
             }
-            if (event.target == updateModal) {
+            if (event.target === updateModal) {
                 closeUpdateModal();
             }
-            if (event.target == deleteModal) {
+            if (event.target === deleteModal) {
                 closeDeleteModal();
             }
         }

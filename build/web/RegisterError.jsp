@@ -15,7 +15,7 @@
                 <form>
                     <div>
                         <span>
-                            <h4>!<br><br>
+                            <h4>Password doesn't match, please try again!<br><br>
                                 <div class="row button">
                                     <input type="button" value="Back" onclick="window.location='index.jsp'">
                                 </div>

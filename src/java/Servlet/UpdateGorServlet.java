@@ -36,6 +36,8 @@ public class UpdateGorServlet extends HttpServlet {
             String LocationLink = request.getParameter("locationLink");
             String Deskripsi = request.getParameter("Deskripsi");
             String updateImageBase64 = request.getParameter("imageBase64");
+            
+            Deskripsi = Deskripsi.replace("\n","<br>").replace("\r","");
 
             Gor gor = new Gor();
             gor.setId_Gor(id);

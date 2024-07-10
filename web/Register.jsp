@@ -29,8 +29,12 @@
                     <input type="password" name="Password" id="registerPassword" required>
                     <label for="registerPassword">Password</label>
                 </div>
+                    <div class="input-group">
+                    <input type="password" name="ConfirmPassword" id="ConfirmPassword" required>
+                    <label for="ConfirmPassword">Konfirmasi Password</label>
+                </div>
    
-                <label>Sudah punya akun? <span id="daftar"><a href="index.jsp"> Masuk Sekarang!</a></span></label>
+                <label>Sudah punya akun? <span id="daftar"><a href="login.jsp"> Masuk Sekarang!</a></span></label>
                 <input class="btn" type="submit" value="Register" >
                 <button type="button" class="btn-exit" onclick="location.href='index.jsp'">Cancel</button>
             </form>

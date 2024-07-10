@@ -24,10 +24,21 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String password = request.getParameter("Password");
+        String confirmPassword = request.getParameter("ConfirmPassword");
+
+        // Check if password and confirm password match
+        if (!password.equals(confirmPassword)) {
+            response.sendRedirect("RegisterError.jsp");
+            return;
+        }
+        
           Register rg = new Register();
         rg.setUsername(request.getParameter("Username"));
         rg.setEmail(request.getParameter("Email"));
         rg.setPassword(request.getParameter("Password"));
+        
 
         userDAO UserDAO = new userDAO();
         boolean success = UserDAO.registerUser(rg);

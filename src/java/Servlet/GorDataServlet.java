@@ -55,6 +55,8 @@ public class GorDataServlet extends HttpServlet {
             String location = request.getParameter("location");
             String locationLink = request.getParameter("locationLink");
             String Deskripsi = request.getParameter("Deskripsi");
+            
+            Deskripsi = Deskripsi.replace("\n","<br>").replace("\r","");
 
             Gor gor = new Gor();
             gor.setNama_Gor(namaGor);

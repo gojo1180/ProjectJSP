@@ -8,7 +8,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Admin Page</title>
     <link rel="stylesheet" href="CSS/Admin.css">
-    <script src="JS/Modal.js"></script>
 </head>
 <body>
     <div class="main-content">
@@ -26,6 +25,7 @@
                 ArrayList<Berita> beritaList = (ArrayList<Berita>) request.getAttribute("beritaList");
                 if (beritaList != null) {
                     for (Berita berita : beritaList) {
+                    String kontenstrim = berita.getKonten().replaceAll("\n","");
             %>
             <tr>
                 <td>
@@ -45,9 +45,9 @@
                 <td class="isi-td"><%= berita.getJudul() %></td>
                 <td class="isi-td"><%= berita.getPenulis() %></td>
                 <td class="isi-td"><%= berita.getTanggal() %></td>
-                <td class="konten-td"><%= berita.getKonten() %></td>
+                <td class="konten-td"><%= berita.getKonten().replace("\n","<br>")%></td>
                 <td class="actions-btn">
-                    <button class="btn-more" id="update" onclick="openUpdateModal(<%= berita.getId()%>, '<%= berita.getJudul()%>', '<%= berita.getPenulis()%>', <%= berita.getTanggal()%>, '<%= berita.getKonten()%>', '<%= base64Image %>')">Update</button>
+                    <button class="btn-more" id="update" onclick="openUpdateModal(<%= berita.getId()%>, '<%= berita.getJudul()%>', '<%= berita.getPenulis()%>', '<%= berita.getTanggal()%>', '<%= kontenstrim %>', '<%= base64Image %>')">Update</button>
                     <button class="btn-more" id="delete" onclick="openDeleteModal(<%= berita.getId()%>)">Delete</button>
                 </td>
             </tr>
@@ -125,6 +125,17 @@
         var deleteModal = document.getElementById('deleteModalGor');
         var deleteButton = document.getElementById('confirmDelete');
         
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        var yyyy = today.getFullYear();
+
+        var formattedDate = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('tanggal').value = formattedDate;
+        document.getElementById('tanggal').setAttribute('min', formattedDate);
+        document.getElementById('updateTanggal').value = formattedDate;
+        document.getElementById('updateTanggal').setAttribute('min', formattedDate);
+        
         // Open the delete modal with the id of the GOR to be deleted
         function openDeleteModal(id) {
             deleteModal.style.display = "block";
@@ -154,7 +165,7 @@
             document.getElementById('updateJudul').value = judul;
             document.getElementById('updatePenulis').value = penulis;
             document.getElementById('updateTanggal').value = tanggal;
-            document.getElementById('updateKonten').value = konten;
+            document.getElementById('updateKonten').value = konten.replaceAll("<br>","\n");
             document.getElementById('updateImageBase64').value = image;
 
             updateModal.style.display = "block";
