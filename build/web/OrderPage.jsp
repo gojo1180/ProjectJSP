@@ -118,11 +118,11 @@
         <div class="content">
             <div class="main-content">
                 <div class="court-pic-title">
-                    <% if (base64Image != null) { %>
-                        <img src="data:image/jpeg;base64,<%= base64Image %>" alt="<%= selectedGor.getNama_Gor() %>">
-                    <% } else { %>
-                        <img src="default-image.jpg" alt="<%= selectedGor != null ? selectedGor.getNama_Gor() : "Default Image" %>">
-                    <% } %>
+                    <% if (base64Image != null) {%>
+                    <img src="data:image/jpeg;base64,<%= base64Image%>" alt="<%= selectedGor.getNama_Gor()%>">
+                    <% } else {%>
+                    <img src="default-image.jpg" alt="<%= selectedGor != null ? selectedGor.getNama_Gor() : "Default Image"%>">
+                    <% }%>
                 </div>
 
                 <div class="h-line"></div>
@@ -131,32 +131,26 @@
                     <div class="deskripsi">
                         <span style="font-size: 17px; font-weight: 800; color: var(--main-color);"><i class="ri-arrow-right-s-fill" style="color: var(--text-color);"></i>Deskripsi</span>
                     </div>
-                    <p>
-                        <%= selectedGor.getDeskripsi()%>
-                    </p>
+                    <p><%= selectedGor.getDeskripsi()%></p>
                 </article>
             </div>
 
             <div class="side-bar">
                 <div class="side-content">
-                    <% if (selectedGor != null) { %>
+                    <% if (selectedGor != null) {%>
                     <div class="gor-desc">
-                        <p id="gor-name"><%= selectedGor.getNama_Gor() %></p>
-                        <span id="rating"><i class="ri-star-fill"></i> <%= selectedGor.getRating() %></span>
+                        <p id="gor-name"><%= selectedGor.getNama_Gor()%></p>
+                        <span id="rating"><i class="ri-star-fill"></i> <%= selectedGor.getRating()%></span>
                     </div>
 
                     <div class="h-line-side"></div>
 
                     <div class="locfaci">
                         <p class="judul">Location</p>
-                        <a href="<%= selectedGor.getLocationLink() %>" target="_blank">
+                        <a href="<%= selectedGor.getLocationLink()%>" target="_blank">
                             <div class="maps">
-                                <div class="text">
-                                    <p><%= selectedGor.getLocation() %></p>
-                                </div>
-                                <div class="pic">
-                                    <i class="ri-map-pin-2-fill"></i>
-                                </div>
+                                <div class="text"><p><%= selectedGor.getLocation()%></p></div>
+                                <div class="pic"><i class="ri-map-pin-2-fill"></i></div>
                             </div>
                         </a>
 
@@ -183,7 +177,7 @@
                     <div class="h-line-side"></div>
                     <div class="order">
                         <div class="judul">Mulai Dari</div>
-                        <div class="subjudul">Rp <%= selectedGor.getHarga() %>/sesi</div>
+                        <div class="subjudul">Rp <%= selectedGor.getHarga()%>/sesi</div>
                         <div class="buttonPesan requires-login">
                             <div class="keterangan">Pesan Sekarang</div>
                         </div>
@@ -192,7 +186,7 @@
                     <div class="gor-desc">
                         <p id="gor-name">GOR Not Available</p>
                     </div>
-                    <% } %>
+                    <% }%>
                 </div>
             </div>
         </div>
@@ -208,11 +202,11 @@
                     <form id="bookingForm" action="BookingServlet" method="post">
                         <div>
                             <label for="name">Nama:</label>
-                            <input type="text" id="name" name="name" value="<%= username %>" required>
+                            <input type="text" id="name" name="name" value="<%= username%>" required>
                         </div>
                         <div>
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="<%= email %>" required>
+                            <input type="email" id="email" name="email" value="<%= email%>" required>
                         </div>
                         <div>
                             <label for="court">Pilih Lapangan:</label>
@@ -228,30 +222,14 @@
                         </div>
                         <div>
                             <label for="time">Pilih Waktu:</label>
-                            <select id="time" name="time" onclick="" required>
-                                <option value="6:00-7:00">6:00 - 7:00</option>
-                                <option value="7:00-8:00">7:00 - 8:00</option>
-                                <option value="8:00-9:00">8:00 - 9:00</option>
-                                <option value="9:00-10:00">9:00 - 10:00</option>
-                                <option value="10:00-11:00">10:00 - 11:00</option>
-                                <option value="11:00-12:00">11:00 - 12:00</option>
-                                <option value="12:00-13:00">12:00 - 13:00</option>
-                                <option value="13:00-14:00">13:00 - 14:00</option>
-                                <option value="14:00-15:00">14:00 - 15:00</option>
-                                <option value="15:00-16:00">15:00 - 16:00</option>
-                                <option value="16:00-17:00">16:00 - 17:00</option>
-                                <option value="17:00-18:00">18:00 - 19:00</option>
-                                <option value="18:00-19:00">19:00 - 20:00</option>
-                                <option value="19:00-20:00">20:00 - 21:00</option>
-                                <option value="20:00-21:00">21:00 - 22:00</option>
-                            </select>
+                            <select id="time" name="time" required></select>
                         </div>
                         <div>
                             <label for="price">Harga:</label>
-                            <input type="number" id="price" name="price" value="<%= selectedGor != null ? selectedGor.getHarga() : 0 %>" readonly="">
+                            <input type="number" id="price" name="price" value="<%= selectedGor != null ? selectedGor.getHarga() : 0%>" readonly="">
                         </div>  
                         <div>
-                            <input type="hidden" name="gor_nama" value="<%= selectedGor != null ? selectedGor.getNama_Gor() : "" %>" >
+                            <input type="hidden" name="gor_nama" value="<%= selectedGor != null ? selectedGor.getNama_Gor() : ""%>" >
                             <button type="submit">Book Now</button>
                         </div>
                     </form>
@@ -268,7 +246,7 @@
 
             // Get the button that opens the modal
             var btn = document.querySelector(".buttonPesan.requires-login");
-            
+
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -276,14 +254,14 @@
 
             var formattedDate = yyyy + '-' + mm + '-' + dd;
             document.getElementById('date').value = formattedDate;
-            document.getElementById('date').setAttribute('min', formattedDate);
+            document.getElementById('date').setAttribute('min', formattedDate);
 
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
 
             // When the user clicks the button, open the modal if logged in, else alert
             btn.onclick = function() {
-                if (<%= isLoggedIn %>) {
+                if (<%= isLoggedIn%>) {
                     modal.style.display = "block";
                 } else {
                     alert("Please log in to book a court.");
@@ -302,37 +280,48 @@
                 }
             }
 
-            // Fetch booked time slots when the date is selected
-            document.getElementById('date').addEventListener('change', function() {
-                var selectedDate = this.value;
-                var gorName = '<%= selectedGor != null ? selectedGor.getNama_Gor() : "" %>';
-                fetchBookedTimeSlots(gorName, selectedDate);
-            });
+            // Function to fetch booked times
+            function fetchBookedTimes() {
+                var date = document.getElementById("date").value;
+                var court = document.getElementById("court").value;
 
-            function fetchBookedTimeSlots(gorName, date) {
-                fetch('BookedTimeSlotsServlet?gorName=' + encodeURIComponent(gorName) + '&date=' + encodeURIComponent(date))
-                    .then(response => response.json())
-                    .then(bookedTimeSlots => {
-                        var timeSelect = document.getElementById('time');
-                        var options = timeSelect.options;
-
-                        // Reset all options
-                        for (var i = 0; i < options.length; i++) {
-                            options[i].disabled = false;
-                            options[i].classList.remove('booked');
-                        }
-
-                        // Disable booked time slots
-                        bookedTimeSlots.forEach(timeSlot => {
-                            for (var i = 0; i < options.length; i++) {
-                                if (options[i].value === timeSlot) {
-                                    options[i].disabled = true;
-                                    options[i].classList.add('booked');
-                                }
-                            }
-                        });
-                    });
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "BookingServlet?date=" + date + "&court=" + court, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var bookedTimes = JSON.parse(xhr.responseText);
+                        updateTimes(bookedTimes);
+                    }
+                };
+                xhr.send();
             }
+
+            // Function to update the time dropdown
+            function updateTimes(bookedTimes) {
+                var timeSelect = document.getElementById("time");
+                var allTimes = ["6:00-7:00", "7:00-8:00", "8:00-9:00", "9:00-10:00", "10:00-11:00", "11:00-12:00",
+                                "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00",
+                                "18:00-19:00", "19:00-20:00", "20:00-21:00", "21:00-22:00"];
+
+                timeSelect.innerHTML = "";
+                for (var i = 0; i < allTimes.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = allTimes[i];
+                    option.text = allTimes[i];
+                    if (bookedTimes.includes(allTimes[i])) {
+                        option.disabled = true;
+                        option.className = "booked";
+                    }
+                    timeSelect.appendChild(option);
+                }
+            }
+
+            // Fetch booked times when the date or court changes
+            document.getElementById("date").addEventListener("change", fetchBookedTimes);
+            document.getElementById("court").addEventListener("change", fetchBookedTimes);
+
+            // Initialize booked times on page load
+            window.onload = fetchBookedTimes;
         </script>
     </body>
 </html>
