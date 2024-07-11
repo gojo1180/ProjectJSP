@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ranu: Super Sport Application</title>
         <link rel="stylesheet" href="CSS/Home.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>

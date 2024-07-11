@@ -137,8 +137,6 @@
                 </article>
             </div>
 
-            <div class="h-line"></div>
-
             <div class="side-bar">
                 <div class="side-content">
                     <% if (selectedGor != null) { %>
@@ -270,6 +268,15 @@
 
             // Get the button that opens the modal
             var btn = document.querySelector(".buttonPesan.requires-login");
+            
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            var yyyy = today.getFullYear();
+
+            var formattedDate = yyyy + '-' + mm + '-' + dd;
+            document.getElementById('date').value = formattedDate;
+            document.getElementById('date').setAttribute('min', formattedDate);
 
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];

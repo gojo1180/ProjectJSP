@@ -9,11 +9,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Booking Page</title>
+        <link rel="stylesheet" href="CSS/loginerror.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     </head>
     <body>
-        <h1>Booking Conflict</h1>
-    <p>Sorry, the selected court, date, and time slot is already booked. Please choose a different time slot.</p>
-    <a href="OrderPage.jsp">Back to Booking</a>
+        <div class="container">
+            <div class="wrapper">
+                <div class="title"><span>Booking Conflict</span></div>
+                <form>
+                    <div>
+                        <span>
+                            <h4>Sorry, the selected court, date, and time slot is already booked. Please choose a different time slot.<br><br>
+                                <div class="row button">
+                                    <input type="button" value="Back" onclick="window.location='GorServlet'">
+                                </div>
+                            </h4>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

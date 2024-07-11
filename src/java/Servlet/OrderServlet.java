@@ -19,6 +19,7 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String gorName = request.getParameter("gorName");
         Gor selectedGor = null;
 

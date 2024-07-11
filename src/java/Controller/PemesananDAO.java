@@ -25,7 +25,7 @@ public class PemesananDAO {
             statement.setDate(2, date);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    bookedSlots.add(resultSet.getString("time_slot"));
+                    bookedSlots.add(resultSet.getString("time"));
                 }
             }
         }
@@ -48,7 +48,7 @@ public class PemesananDAO {
     
  public List<Pemesanan> getBookingHistoryByUser(String name) throws SQLException {
     List<Pemesanan> bookingHistory = new ArrayList<>();
-    String sql = "SELECT * FROM pemesanan_tbl WHERE Nama_Pemesan = ?";
+    String sql = "SELECT * FROM pemesanan_tbl WHERE Nama_Pemesan = ? ORDER BY date DESC";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setString(1, name);
         try (ResultSet resultSet = statement.executeQuery()) {

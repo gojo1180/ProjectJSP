@@ -17,8 +17,8 @@
     <section class="contact-form-section">
         <div class="container">
             <h2>Terima kasih sudah mengunjungi website kami!</h2>
-            <p>Mau mengobrol langsung dengan tim Super Sport App? Apakah Kamu memiliki pertanyaan seputar platform Super Sport App?</p>
-            <p>Sampaikan pertanyaan Anda disini. Tim kami akan menghubungi Anda secepatnya.</p>
+            <p>Mau mengobrol langsung dengan tim Super Sport App? Apakah Kamu memiliki pertanyaan seputar platform Super Sport App?
+            Sampaikan pertanyaan Anda disini. Tim kami akan menghubungi Anda secepatnya.</p>
             <form id="contact-form" action="ContactUsServlet" method="post">
                 <div class="form-group">
                     <input type="text" id="name" name="name" placeholder="Nama" required>

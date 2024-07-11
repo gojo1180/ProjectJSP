@@ -22,8 +22,9 @@
                 <button class="dropbtn">Data <i class="ri-arrow-down-s-line"></i></button>
                 <div class="dropdown-content">
                     <a id="gor-button" onclick="location.href='GorDataServlet'">Data GOR</a>
-                    <a user-button" onclick="location.href='UserServlet'">Data User</a>
+                    <a id="user-button" onclick="location.href='UserServlet'">Data User</a>
                     <a id="berita-button" onclick="location.href='BeritaDataServlet'">Data Berita</a>
+                    <a id="history-button" onclick="location.href='HistoryDataServlet'">Data History</a>
                 </div>
             </div>
 <!--            <button id="gor-button" onclick="location.href='GorDataServlet'">Data GOR</button>

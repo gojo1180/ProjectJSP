@@ -7,11 +7,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Admin Page</title>
-    <link rel="stylesheet" href="CSS/Admin.css">
+    <link rel="stylesheet" href="CSS/AdminStyle.css">
 </head>
 <body>
     <div class="main-content">
-        <h1>Data Berita</h1>
+        <div class="content-title">
+            <h1>Data Berita</h1>
+            <button class="btn-addgor" onclick="openAddModal()">Add Berita</button>
+        </div>
         <table border="1">
             <tr>
                 <th>Gambar</th>
@@ -56,7 +59,6 @@
                 } 
             %>
         </table>
-        <button class="btn-addgor" onclick="openAddModal()">Add Berita</button>
     </div>
 
     <!-- Add Berita Modal -->

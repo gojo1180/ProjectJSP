@@ -21,7 +21,7 @@
                     <ul>
                         <li><a href="Profile.jsp">Data Diri</a></li>
                         <li class="active"><a href="UbahKataSandi.jsp">Ubah Kata Sandi</a></li>
-                        <li><a href="RiwayatPemesanan.jsp">Riwayat Pemesanan</a></li>
+                        <li><a href="History.jsp">Riwayat Pemesanan</a></li>
                     </ul>
                 </div>
                 <div class="main-content">
@@ -38,6 +38,16 @@
                             <label for="konfirmasi-sandi-baru">Ketik Ulang Kata Sandi Baru<span>*</span></label>
                             <input type="password" id="konfirmasi-sandi-baru" name="konfirmasi-sandi-baru" required>
                         </div>
+                        <% if (session.getAttribute("errorMessage") != null) { %>
+                            <div class="error-message">
+                                <%= session.getAttribute("errorMessage") %>
+                            </div>
+                        <% session.removeAttribute("errorMessage"); } %>
+                        <% if (session.getAttribute("successMessage") != null) { %>
+                            <div class="success-message">
+                                <%= session.getAttribute("successMessage") %>
+                            </div>
+                        <% session.removeAttribute("successMessage"); } %>
                         <button type="submit" class="btn-save">Simpan Perubahan</button>
                     </form>
                 </div>

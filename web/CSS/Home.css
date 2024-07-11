@@ -311,13 +311,14 @@ header {
 }
 
 .card h2 {
-    font-size: 2rem;
+    font-size: 25px;
     margin-bottom: 10px;
 }
 
 .card p {
-    font-size: 1rem;
+    font-size: 15px;
     margin-bottom: 20px;
+    color: var(--text-color);
 }
 
 .card a {
@@ -332,6 +333,10 @@ header {
 
 .card a:hover {
     background-color: #A00000;
+}
+
+.card .features-list{
+    color: var(--text-color);
 }
 
 .card-background {

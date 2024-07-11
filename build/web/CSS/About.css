@@ -215,6 +215,24 @@ main{
     color: var(--text-color);
 }
 
+h1{
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: 30px;
+}
+
+h2{
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+p{
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 15px;
+}
+
 .more-info-section {
     padding: 50px 0;
     background-color: var(--bg-color);

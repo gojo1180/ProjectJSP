@@ -8,7 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Page</title>
-        <link rel="stylesheet" href="CSS/Admin.css">
+        <link rel="stylesheet" href="CSS/AdminStyle.css">
     </head>
     <body>
         <div class="main-content    ">

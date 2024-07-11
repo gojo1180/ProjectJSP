@@ -7,12 +7,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Admin Page</title>
-    <link rel="stylesheet" href="CSS/Admin.css">
-    <script src="JS/Modal.js"></script>
+    <link rel="stylesheet" href="CSS/AdminStyle.css">
 </head>
 <body>
     <div class="main-content">
-        <h1>Data GOR</h1>
+        <div class="content-title">
+            <h1>Data GOR</h1>
+            <button class="btn-addgor" onclick="openAddModal()">Add GOR</button>
+        </div>
         <table border="1">
             <tr>
                 <th>Gambar</th>
@@ -69,7 +71,6 @@
                 } 
             %>
         </table>
-        <button class="btn-addgor" onclick="openAddModal()">Add GOR</button>
     </div>
 
     <!-- Add GOR Modal -->

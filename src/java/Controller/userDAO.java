@@ -87,6 +87,33 @@ public class userDAO {
         return false;
     }
     }
+    
+    
+    public boolean validatePassword(String username, String password) {
+        String sql = "SELECT * FROM user_tbl WHERE Username = ? AND Password = ?";
+        try (Connection conn = new DbConnection().setConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    public boolean updateUserPassword(String username, String newPassword) {
+        String sql = "UPDATE user_tbl SET Password = ? WHERE Username = ?";
+        try (Connection conn = new DbConnection().setConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, newPassword);
+            ps.setString(2, username);
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
 }
-

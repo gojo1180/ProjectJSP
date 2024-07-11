@@ -30,13 +30,14 @@
 
         <section class="vision-mission-section">
             <div class="about-container">
+                <br>
                 <h1>Visi dan Misi</h1>
-                <br><br>
+                <br>
                 <div class="vision">
                     <h2>Visi</h2>
                     <p>Menjadi platform terbaik dan terpercaya untuk memesan lapangan olahraga badminton di Indonesia, serta mendukung perkembangan komunitas olahraga badminton.</p>
                 </div>
-                <br><br>
+                <br>
                 <div class="mission">
                     <h2>Misi</h2>
                     <ul>
