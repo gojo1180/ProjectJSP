@@ -261,7 +261,7 @@
 
             // When the user clicks the button, open the modal if logged in, else alert
             btn.onclick = function() {
-                if (<%= isLoggedIn%>) {
+                if (<%= isLoggedIn %>) {
                     modal.style.display = "block";
                 } else {
                     alert("Please log in to book a court.");
@@ -284,9 +284,10 @@
             function fetchBookedTimes() {
                 var date = document.getElementById("date").value;
                 var court = document.getElementById("court").value;
+                var gorNama = "<%= selectedGor != null ? selectedGor.getNama_Gor() : ""%>";
 
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "BookingServlet?date=" + date + "&court=" + court, true);
+                xhr.open("GET", "BookingServlet?date=" + date + "&court=" + court + "&gor_nama=" + gorNama, true);
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var bookedTimes = JSON.parse(xhr.responseText);
@@ -327,4 +328,3 @@
 </html>
 
 <%@include file="Footer.jsp" %>
-

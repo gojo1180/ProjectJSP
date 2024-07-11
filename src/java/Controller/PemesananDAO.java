@@ -17,19 +17,23 @@ public class PemesananDAO {
         this.connection = new DbConnection().setConnection();
     }
 
-    public List<String> getBookedTimes(String court, Date date) throws SQLException {
-        List<String> bookedSlots = new ArrayList<>();
-        String query = "SELECT Time FROM pemesanan_tbl WHERE court = ? AND date = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, court);
-            statement.setDate(2, date);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    bookedSlots.add(resultSet.getString("time"));
+    public List<String> getBookedTimes(String gorNama, String court, Date date) throws SQLException {
+        String sql = "SELECT time FROM pemesanan_tbl WHERE Nama_Gor = ? AND court = ? AND date = ?";
+        List<String> bookedTimes = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, gorNama);
+            statement.setString(2, court);
+            statement.setDate(3, date);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    bookedTimes.add(rs.getString("time"));
                 }
             }
         }
-        return bookedSlots;
+
+        return bookedTimes;
     }
 
     public void addPemesanan(Pemesanan pemesanan) throws SQLException {

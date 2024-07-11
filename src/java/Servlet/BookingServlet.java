@@ -1,22 +1,21 @@
-    package Servlet;
+package Servlet;
 
-    import Controller.PemesananDAO;
-    import Model.Pemesanan;
-    import java.io.IOException;
-    import java.sql.Connection;
-    import java.sql.Date;
-    import java.sql.SQLException;
-    import java.util.List;
-    import javax.servlet.ServletException;
-    import javax.servlet.annotation.WebServlet;
-    import javax.servlet.http.HttpServlet;
-    import javax.servlet.http.HttpServletRequest;
-    import javax.servlet.http.HttpServletResponse;
-    import com.google.gson.Gson;
+import Controller.PemesananDAO;
+import Model.Pemesanan;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
 
-   @WebServlet("/BookingServlet")
+@WebServlet("/BookingServlet")
 public class BookingServlet extends HttpServlet {
-
     private Connection connection;
 
     @Override
@@ -29,10 +28,11 @@ public class BookingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String date = request.getParameter("date");
         String court = request.getParameter("court");
+        String gorNama = request.getParameter("gor_nama");
 
         PemesananDAO pemesananDAO = new PemesananDAO(connection);
         try {
-            List<String> bookedTimeSlots = pemesananDAO.getBookedTimes(court, Date.valueOf(date));
+            List<String> bookedTimeSlots = pemesananDAO.getBookedTimes(gorNama, court, Date.valueOf(date));
 
             // Convert list to JSON and write to response
             Gson gson = new Gson();
@@ -55,12 +55,12 @@ public class BookingServlet extends HttpServlet {
         Date date = Date.valueOf(request.getParameter("date"));
         String[] times = request.getParameterValues("time");
         double price = Double.parseDouble(request.getParameter("price"));
-        String gor_Nama = request.getParameter("gor_nama");
+        String gorNama = request.getParameter("gor_nama");
 
         PemesananDAO pemesananDAO = new PemesananDAO(connection);
 
         try {
-            List<String> bookedTimes = pemesananDAO.getBookedTimes(court, date);
+            List<String> bookedTimes = pemesananDAO.getBookedTimes(gorNama, court, date);
             request.setAttribute("bookedTimes", bookedTimes);
 
             for (String time : times) {
@@ -78,7 +78,7 @@ public class BookingServlet extends HttpServlet {
                 pemesanan.setDate(date);
                 pemesanan.setTime(time);
                 pemesanan.setHarga(price);
-                pemesanan.setGor_NamaGor(gor_Nama);
+                pemesanan.setGor_NamaGor(gorNama);
 
                 pemesananDAO.addPemesanan(pemesanan);
             }
