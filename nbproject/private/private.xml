@@ -8,14 +8,20 @@
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Servlet/GorDataServlet.java</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Controller/BeritaDAO.java</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/Header.jsp</file>
+            <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Servlet/BeritaDetailServlet.java</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/Admin_DataGor.jsp</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Servlet/HistoryDataServlet.java</file>
+            <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Model/Pemesanan.java</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/BookingError.jsp</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/Admin_DataHistory.jsp</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Servlet/BeritaDataServlet.java</file>
+            <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/CSS/History.css</file>
+            <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Servlet/BookingServlet.java</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/BookingConflict.jsp</file>
+            <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Controller/PemesananDAO.java</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/web/History.jsp</file>
             <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Model/Berita.java</file>
+            <file>file:/C:/Users/VENU%20WICAKSONO/Documents/NetBeansProjects/Project/src/java/Model/Gor.java</file>
         </group>
     </open-files>
 </project-private>

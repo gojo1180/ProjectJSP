@@ -37,6 +37,22 @@ public class userDAO {
         }
     }
     
+    public boolean isUsernameTaken(String username) {
+        String sql = "SELECT * FROM user_tbl WHERE Username = ?";
+        try (Connection conn = new DbConnection().setConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("SQL State: " + e.getSQLState());
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("Message: " + e.getMessage());
+            return false;
+        }
+    }
+    
      public User getUserByUsername(String username) {
         String sql = "SELECT * FROM user_tbl WHERE Username = ?";
         try (Connection conn = new DbConnection().setConnection();

@@ -25,28 +25,35 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String username = request.getParameter("Username");
         String password = request.getParameter("Password");
         String confirmPassword = request.getParameter("ConfirmPassword");
 
-        // Check if password and confirm password match
-        if (!password.equals(confirmPassword)) {
-            response.sendRedirect("RegisterError.jsp");
+        userDAO UserDAO = new userDAO();
+
+        // Check if username is already taken
+        if (UserDAO.isUsernameTaken(username)) {
+            response.sendRedirect("RegisterError.jsp?error=UsernameTaken");
             return;
         }
-        
-          Register rg = new Register();
-        rg.setUsername(request.getParameter("Username"));
-        rg.setEmail(request.getParameter("Email"));
-        rg.setPassword(request.getParameter("Password"));
-        
 
-        userDAO UserDAO = new userDAO();
+        // Check if password and confirm password match
+        if (!password.equals(confirmPassword)) {
+            response.sendRedirect("RegisterError.jsp?error=PasswordMismatch");
+            return;
+        }
+
+        Register rg = new Register();
+        rg.setUsername(username);
+        rg.setEmail(request.getParameter("Email"));
+        rg.setPassword(password);
+
         boolean success = UserDAO.registerUser(rg);
 
         if (success) {
             response.sendRedirect("login.jsp");
         } else {
-            response.sendRedirect("RegisterError.jsp");
+            response.sendRedirect("RegisterError.jsp?error=RegistrationFailed");
         }
     }
 
